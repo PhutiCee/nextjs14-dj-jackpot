@@ -42,7 +42,7 @@ export default function Page() {
     return (
         <div className='max-w-5xl mx-auto flex flex-col md:flex-row mt-4 gap-4'>
             <Link href={'/profile'}>
-                <div className='bg-gray-200 dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-3 flex-shrink-0 mx-auto'>
+                <div className='bg-gray-100 dark:bg-transparent p-4 rounded-lg shadow-lg mb-3 flex-shrink-0 mx-auto'>
                     <Image
                         src="/dj_jackpot_2.jpg"
                         alt="background image"
@@ -53,13 +53,13 @@ export default function Page() {
                     />
                 </div>
             </Link>
-            <div className='bg-gray-200 dark:bg-gray-800 p-4 rounded-lg shadow-lg mb-3 flex-grow mx-4'>
-                <div className='p-2 flex flex-col items-center gap-4 h-full'>
-                    <h2 className='text-3xl font-bold text-gray-800 dark:text-gray-200'>Mixtape name</h2>
+            <div className='bg-gray-100 dark:bg-transparent p-4 rounded-lg shadow-lg mb-3 flex-grow mx-4'>
+                <div className='p-2 flex flex-col items-center gap-4 h-full max-w-2xl'>
+                    <h2 className='text-2xl font-bold text-gray-800 dark:text-gray-200'>MIX-21-DJ-JACKPOT-SPRING-DAYS-28-SEPTEMBER-2019</h2>
                     <Link href={'/profile'}>
-                        <p className='font-mono text-gray-500 hover:text-blue-400'>DJ Jackpot</p>
+                        <p className='font-mono text-gray-400 hover:text-blue-400'>DJ Jackpot</p>
                     </Link>
-                    <p className='font-mono text-gray-500'>16 February 2024</p>
+                    <p className='font-mono text-gray-400'>16 February 2024</p>
                     <div className='flex flex-col justify-between items-center gap-2 w-full h-full'>
                         <div className='flex items-center gap-4'>
                             <button>- 30</button>

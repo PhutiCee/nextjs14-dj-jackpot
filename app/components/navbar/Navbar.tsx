@@ -21,7 +21,7 @@ export default function Navbar() {
                 <div className='md:hidden'></div>
                 <ul className='hidden md:flex items-center gap-3 font-mono text-lg'>
                     <li> <Link href={'/'} className='p-2 hover:bg-blue-400 rounded-md hover:text-white'>Home</Link> </li>
-                    <li> <Link href={'/event'} className='p-2 hover:bg-blue-400 rounded-md hover:text-white'>Events</Link> </li>
+                    <li> <Link href={'/events'} className='p-2 hover:bg-blue-400 rounded-md hover:text-white'>Events</Link> </li>
                     <li> <Link href={'/mixtapes'} className='p-2 hover:bg-blue-400 rounded-md hover:text-white'>Mixtapes</Link> </li>
                     <li className='cursor-pointer' onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>{theme === 'light' ? <FaMoon /> : <FaSun />}</li>
                 </ul>
@@ -40,10 +40,10 @@ export default function Navbar() {
                                 <Link href={"/"} onClick={toggleMobileMenu} className="hover:text-gray-500">Home</Link>
                             </li>
                             <li>
-                                <Link href={"/profile"} onClick={toggleMobileMenu} className="hover:text-gray-500">Events</Link>
+                                <Link href={"/events"} onClick={toggleMobileMenu} className="hover:text-gray-500">Events</Link>
                             </li>
                             <li>
-                                <Link href={"/category"} onClick={toggleMobileMenu} className="hover:text-gray-500">Mixtapes</Link>
+                                <Link href={"/mixtapes"} onClick={toggleMobileMenu} className="hover:text-gray-500">Mixtapes</Link>
                             </li>
                             <li onClick={() => { setTheme(theme === 'light' ? 'dark' : 'light'); }}>
                                 <div className="flex items-center mx-3 my-3">

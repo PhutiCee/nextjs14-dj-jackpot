@@ -1,5 +1,26 @@
 import type { Config } from "tailwindcss";
 
+const plugin = require('tailwindcss/plugin');
+
+const customStyle = plugin(
+  function ({ addUtilities }: { addUtilities: any }) {
+    addUtilities({
+      '.rotate-y-180': {
+        transform: 'rotateY(180deg)'
+      },
+      '.preserve-3d': {
+        transformStyle: 'preserve-3d'
+      },
+      '.perspective-1000': {
+        perspective: '1000px'
+      },
+      '.backface-hidden': {
+        backfaceVisibility: 'hidden'
+      },
+    });
+  }
+);
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,7 +36,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [customStyle],
   darkMode: 'class'
 };
 export default config;
