@@ -16,8 +16,8 @@ export default function Home() {
       </div>
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-around h-full max-w-7xl mx-auto">
         <div className='flex flex-col items-center max-w-xl py-8 md:py-16 px-6 md:px-12 text-center'>
-          <h1 className='text-3xl md:text-6xl font-semibold text-gray-800 dark:text-gray-100 leading-tight mt-4 md:mt-0 mb-4'>Support DJ Jackpot's Mixtapes</h1>
-          <p className='text-lg text-gray-700 dark:text-gray-300 mb-6'>"Guys, Support ya lena e ntira Motho o mo kaone mo BOPHELONG, Modimo a le okeletse Matsatsi a Bophelo" - DJ Jackpot</p>
+          <h1 className='text-3xl md:text-6xl font-semibold text-gray-800 dark:text-gray-100 leading-tight mt-4 md:mt-0 mb-4'>Support DJ Jackpot&apos;s Mixtapes</h1>
+          <p className='text-lg text-gray-700 dark:text-gray-300 mb-6'>&quot;Guys, Support ya lena e ntira Motho o mo kaone mo BOPHELONG, Modimo a le okeletse Matsatsi a Bophelo&quot; - DJ Jackpot</p>
           <Link href={'/mixtapes'}>
             <div className='inline-block py-3 px-8 bg-green-500 hover:bg-green-600 text-white rounded-lg text-lg font-semibold transition duration-300 ease-in-out'>Explore Mixtapes</div>
           </Link>

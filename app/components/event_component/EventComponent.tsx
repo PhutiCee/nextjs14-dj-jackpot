@@ -18,7 +18,7 @@ export default function EventComponent() {
                     <div className="absolute inset-0 w-full h-full bg-blue-500 text-white flex flex-col justify-center items-center rotate-y-180 backface-hidden">
                         <h1 className="text-2xl font-bold">DJ Jackpot</h1>
                         <p className="text-lg">Jackpot Music Industry</p>
-                        <p>Let's meet there and enjoy, shitaaa!</p>
+                        <p>Let&apos;s meet there and enjoy, shitaaa!</p>
                     </div>
                 </div>
             </div>
