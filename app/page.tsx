@@ -1,16 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import backgroundImage from '../public/dj_jackpot.jpg'
 
 export default function Home() {
   return (
     <div className="relative h-screen overflow-hidden bg-gray-100 dark:bg-gray-900">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/dj_jackpot.jpg"
+          src={backgroundImage}
           alt="background image"
           layout="fill"
           objectFit="cover"
           quality={100}
+          priority
           className='opacity-30 dark:opacity-10'
         />
       </div>
