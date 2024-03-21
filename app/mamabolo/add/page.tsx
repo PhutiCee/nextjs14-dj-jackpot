@@ -1,16 +1,52 @@
-import React from 'react'
+"use client"
+import axios from 'axios';
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 
 export default function AddMixtape() {
-    async function upload(formData: FormData) {
-        'use server'
-        const image = formData.get("image")
-        const audio = formData.get("audio")
-        console.log(formData);
+    const [image, setImage] = useState<File | null>(null);
+    const [audio, setAudio] = useState<File | null>(null);
 
+    const onImageChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setImage(e.target.files[0])
+        }
     }
+    const onAudioChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setAudio(e.target.files[0])
+        }
+    }
+
+    const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        try {
+            if (!image || !audio) {
+                return;
+            }
+            const formData = new FormData();
+            formData.append("image", image);
+            formData.append("audio", audio);
+
+            const response = await axios.post("/api/upload-mixtape", formData);
+            const data = await response.data;
+            console.log(data);
+
+        } catch (error: any) {
+            console.log("Error", error.message);
+
+        }
+    }
+    // async function upload(formData: FormData) {
+    //     'use server'
+    //     const image = formData.get("image")
+    //     const audio = formData.get("audio")
+    //     console.log(formData);
+
+    // }
     return (
         <div className='flex flex-col items-center justify-center h-full'>
-            <form action={upload} className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md mt-16 dark:text-gray-900">
+            <form onSubmit={onSubmitHandler} className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md mt-16 dark:text-gray-900">
                 <h2 className="text-2xl font-semibold mb-4 text-center">Add Mixtape</h2>
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-medium mb-2">Mixtape Name:</label>
@@ -24,6 +60,7 @@ export default function AddMixtape() {
                 <div className="mb-4">
                     <label htmlFor="image" className="block text-sm font-medium mb-2">Image:</label>
                     <input
+                        onChange={onImageChangeHandler}
                         type="file"
                         id="image"
                         name="image"
@@ -33,6 +70,7 @@ export default function AddMixtape() {
                 <div className="mb-4">
                     <label htmlFor="audio" className="block text-sm font-medium mb-2">Audio:</label>
                     <input
+                        onChange={onAudioChangeHandler}
                         type="file"
                         id="audio"
                         name="audio"
