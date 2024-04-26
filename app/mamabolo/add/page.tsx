@@ -1,49 +1,56 @@
 "use client"
 import axios from 'axios';
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 export default function AddMixtape() {
+    const [name, setName] = useState('');
     const [image, setImage] = useState<File | null>(null);
     const [audio, setAudio] = useState<File | null>(null);
 
-    const onImageChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    const onImageChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setImage(e.target.files[0])
+            setImage(e.target.files[0]);
         }
-    }
-    const onAudioChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    };
+
+    const onAudioChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
-            setAudio(e.target.files[0])
+            setAudio(e.target.files[0]);
         }
-    }
+    };
 
     const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
-            if (!image || !audio) {
+            if (!name || !image || !audio) {
                 return;
             }
+
             const formData = new FormData();
-            formData.append("image", image);
-            formData.append("audio", audio);
+            formData.append('name', name);
+            formData.append('image', image);
+            formData.append('audio', audio);
 
             const response = await axios.post("/api/upload-mixtape", formData);
-            const data = await response.data;
-            console.log(data);
+            const data = response.data;
 
+            const songData = {
+                name: name,
+                link: data.audioLink,
+            };
+            const jackpotAPi = await axios.post("/api/add_song", songData);
+            const finalData = jackpotAPi.data;
+            console.log("finalData");
+            console.log(finalData);
+            setName('');
+            setAudio(null);
+            setImage(null);
         } catch (error: any) {
-            console.log("Error", error.message);
-
+            console.log("(Phuti) Error:", error.message);
         }
-    }
-    // async function upload(formData: FormData) {
-    //     'use server'
-    //     const image = formData.get("image")
-    //     const audio = formData.get("audio")
-    //     console.log(formData);
+    };
 
-    // }
     return (
         <div className='flex flex-col items-center justify-center h-full'>
             <form onSubmit={onSubmitHandler} className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md mt-16 dark:text-gray-900">
@@ -51,6 +58,8 @@ export default function AddMixtape() {
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-medium mb-2">Mixtape Name:</label>
                     <input
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
                         type="text"
                         id="name"
                         name="name"

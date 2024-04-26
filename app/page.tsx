@@ -31,7 +31,7 @@ export default function Home() {
             alt="DJ Jackpot"
             width={400}
             height={400}
-            className='rounded-lg md:rounded-full'
+            className='rounded-lg md:rounded-full h-full w-full'
           />
         </div>
       </div>

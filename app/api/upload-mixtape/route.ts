@@ -11,16 +11,16 @@ export const POST = async (req: NextRequest) => {
     const dataImage: any = await UploadImage(image, "MixtapeImage");
     const dataAudio: any = await UploadAudio(audio, "Mixtape");
 
-    // MongoDb or Database
-    //Image Url
-    console.log(dataImage?.secure_url)
-    //Image ID
-    console.log(dataImage?.public_id)
+    // // MongoDb or Database
+    // //Image Url
+    // console.log(dataImage?.secure_url)
+    // //Image ID
+    // console.log(dataImage?.public_id)
 
-    //Audio Url
-    console.log(dataAudio?.secure_url)
-    //Audio ID
-    console.log(dataAudio?.public_id)
+    // //Audio Url
+    // console.log(dataAudio?.secure_url)
+    // //Audio ID
+    // console.log(dataAudio?.public_id)
 
-    return NextResponse.json({ message: "Uploaded succesfully" }, { status: 200 });
+    return NextResponse.json({ audioLink: dataAudio?.secure_url, imageLink: dataImage?.secure_url }, { status: 200 });
 }
