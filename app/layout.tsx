@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import { Providers } from "./provider";
 import { ThemeSwitcher } from "./components/ThemeSwitcher ";
+import Footer from "./components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <ThemeSwitcher />
           <Navbar />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
