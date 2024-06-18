@@ -26,10 +26,10 @@ export default function Home() {
             className="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded-xl"
           />
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-300 dark:text-gray-100">
-            Support DJ Jackpot's Mixtapes
+            Support DJ Jackpot&apos;s Mixtapes
           </h1>
           <p className="mb-8 leading-relaxed text-gray-300 dark:text-gray-300">
-            "Guys, Support ya lena e ntira Motho o mo kaone mo BOPHELONG, Modimo a le okeletse Matsatsi a Bophelo" - DJ Jackpot
+            &quot;Guys, Support ya lena e ntira Motho o mo kaone mo BOPHELONG, Modimo a le okeletse Matsatsi a Bophelo&quot; - DJ Jackpot
           </p>
           <div className="flex justify-center">
             <Link href="/mixtapes" className="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
