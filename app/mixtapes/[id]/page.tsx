@@ -1,10 +1,11 @@
-'use client'
+"use client"
+import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
+import { FaDownload, FaPause, FaPlay } from 'react-icons/fa';
+import axios from 'axios'
 import { Mixtape } from '@/types';
-import axios from 'axios';
-import Image from 'next/image'
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react'
-import { FaDownload, FaPause, FaPlay } from 'react-icons/fa'
+import EventComponent from '@/app/components/event_component/EventComponent';
 
 type Params = {
     params: {
@@ -13,12 +14,16 @@ type Params = {
 };
 
 export default function Page({ params: { id } }: Params) {
+    // State hooks
     const [isPlaying, setIsPlaying] = useState(false);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    const audioPlayer = useRef<HTMLAudioElement>(null);
     const [mixtape, setMixtape] = useState<Mixtape | null>(null);
 
+    // Ref for audio player
+    const audioPlayer = useRef<HTMLAudioElement>(null);
+
+    // Fetch mixtape data on component mount
     useEffect(() => {
         const fetchMixtapes = async (id: number) => {
             try {
@@ -31,9 +36,9 @@ export default function Page({ params: { id } }: Params) {
         };
 
         fetchMixtapes(id);
-    }, [id])
+    }, [id]);
 
-
+    // Toggle play/pause functionality
     const togglePlayButton = () => {
         setIsPlaying(!isPlaying);
         if (audioPlayer.current) {
@@ -45,24 +50,28 @@ export default function Page({ params: { id } }: Params) {
         }
     };
 
+    // Format time in MM:SS format
     const formatTime = (time: number) => {
         const minutes = Math.floor(time / 60);
         const seconds = Math.floor(time % 60);
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
+    // Update current time as audio plays
     const handleTimeUpdate = () => {
         if (audioPlayer.current) {
             setCurrentTime(audioPlayer.current.currentTime);
         }
     };
 
+    // Set duration on audio loaded metadata event
     const handleLoadedMetadata = () => {
         if (audioPlayer.current) {
             setDuration(audioPlayer.current.duration);
         }
     };
 
+    // Handle download functionality
     const handleDownload = () => {
         if (mixtape) {
             axios({
@@ -87,29 +96,33 @@ export default function Page({ params: { id } }: Params) {
         }
     };
 
-
     return (
-        <div className='max-w-5xl mx-auto flex flex-col md:flex-row mt-4 gap-4'>
-            <Link href={'/profile'}>
+        <>
+            <div className='max-w-5xl mx-auto flex flex-col md:flex-row mt-4 gap-4'>
+                {/* Left column */}
                 <div className='bg-gray-100 dark:bg-transparent p-4 rounded-lg shadow-lg mb-3 flex-shrink-0 mx-auto'>
                     <Image
                         src="/dj_jackpot_2.jpg"
-                        alt="background image"
+                        alt="DJ Jackpot"
                         width={400}
                         height={400}
                         className='h-full w-full rounded-xl'
                     />
                 </div>
-            </Link>
-            <div className='bg-gray-100 dark:bg-transparent p-4 rounded-lg shadow-lg mb-3 flex-grow mx-4'>
-                {mixtape && (
-                    <div className='p-2 flex flex-col items-center gap-4 h-full max-w-2xl'>
-                        <h2 className='text-2xl font-bold text-gray-800 dark:text-gray-200'>{mixtape.name}</h2>
-                        <Link href={'/profile'}>
-                            <p className='font-mono text-gray-400 hover:text-blue-400'>DJ Jackpot</p>
-                        </Link>
-                        {/* <p className='font-mono text-gray-400'>16 February 2024</p> */}
-                        <div className='flex flex-col justify-between items-center gap-2 w-full h-full'>
+
+                {/* Right column */}
+                <div className='bg-gray-100 dark:bg-transparent p-4 rounded-lg shadow-lg mb-3 flex-grow mx-4'>
+                    {mixtape && (
+                        <div className='p-2 flex flex-col items-center gap-4 h-full max-w-2xl'>
+                            {/* Mixtape title */}
+                            <h2 className='text-2xl font-bold text-gray-800 dark:text-gray-200'>{mixtape.name}</h2>
+
+                            {/* DJ name (link to profile) */}
+                            <Link href={'/profile'}>
+                                <p className='font-mono text-gray-400 hover:text-blue-400'>DJ Jackpot</p>
+                            </Link>
+
+                            {/* Play controls */}
                             <div className='flex items-center gap-4'>
                                 <button>- 30</button>
                                 <button onClick={togglePlayButton} className='text-lg border border-gray-500 p-3 rounded-full text-center'>
@@ -117,12 +130,16 @@ export default function Page({ params: { id } }: Params) {
                                 </button>
                                 <button>30 +</button>
                             </div>
+
+                            {/* Audio player */}
                             <audio
                                 ref={audioPlayer}
                                 src={mixtape.link}
                                 onTimeUpdate={handleTimeUpdate}
                                 onLoadedMetadata={handleLoadedMetadata}
                             ></audio>
+
+                            {/* Time controls */}
                             <div className='flex justify-between items-center w-full gap-4 mt-2'>
                                 <span className="text-gray-500">{formatTime(currentTime)}</span>
                                 <input
@@ -140,11 +157,23 @@ export default function Page({ params: { id } }: Params) {
                                 <span className="text-gray-500">{formatTime(duration)}</span>
                             </div>
 
-                            <button className='flex items-center gap-4' onClick={handleDownload}><FaDownload /> <span>Download</span></button>
+                            {/* Download button */}
+                            <button className='flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transition-colors' onClick={handleDownload}>
+                                <FaDownload />
+                                <span>Download</span>
+                            </button>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
-        </div>
-    )
+            <h1 className='text-4xl text-center mt-20'>Events</h1>
+            <div className='grid grid-cols-1 md:grid-cols-4 gap-2 mt-5 mb-10'>
+                <EventComponent />
+                <EventComponent />
+                <EventComponent />
+                <EventComponent />
+            </div>
+
+        </>
+    );
 }

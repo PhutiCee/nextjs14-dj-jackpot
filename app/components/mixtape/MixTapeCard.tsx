@@ -11,7 +11,7 @@ interface MixtapeCardProps {
 export default function MixTapeCard({ mixtape }: MixtapeCardProps) {
 
     return (
-        <div className='flex items-center bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden mx-auto mb-8 w-full max-w-lg'>
+        <div className='flex items-center bg-white dark:bg-gray-900 rounded-xl shadow-md overflow-hidden mx-auto mb-3 w-full max-w-lg'>
             <div className='relative h-48 w-48'>
                 <Image
                     src={img}
